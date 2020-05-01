@@ -1,0 +1,5 @@
+input-output:
+  input_dir: G:/
+  output_dir: E:/Images/2020
+  separate_raw: yes
+  raw_dir_name: RAW
