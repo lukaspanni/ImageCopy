@@ -1,7 +1,7 @@
 import os
 import yaml
 
-
+from grouper import GroupBy, Grouper
 from image_copier import ImageCopier, RAWSeparateImageCopier
 from image_file import ImageFile
 
@@ -39,13 +39,31 @@ if __name__ == "__main__":
     with open(config_file, "r") as yml:
         cfg = yaml.load(yml, Loader=yaml.SafeLoader)
 
-    if not os.path.exists(cfg['input-output']['input_dir']):
-        print("Input directory", cfg['input-output']['input_dir'], "not found")
+    if 'input-output' not in cfg:
+        print("Error in config file")
+        exit(-1)
 
-    if cfg['input-output']['separate_raw']:
-        copier = RAWSeparateImageCopier(cfg['input-output']['output_dir'], cfg['input-output']['raw_dir_name'])
+    if 'input_dir' not in cfg['input-output'] or not os.path.exists(cfg['input-output']['input_dir']):
+        print("Input directory not found")
+
+    grouping = None
+    if 'grouping' in cfg:
+        group_by = set()
+        if 'year' in cfg['grouping'] and cfg['grouping']['year']:
+            group_by.add(GroupBy.YEAR)
+        if 'month' in cfg['grouping'] and cfg['grouping']['month']:
+            if 'named_named' in cfg['grouping'] and cfg['grouping']['months_named']:
+                group_by.add(GroupBy.MONTH_NAMED)
+            else:
+                group_by.add(GroupBy.MONTH)
+        if 'day' in cfg['grouping'] and cfg['grouping']['day']:
+            group_by.add(GroupBy.DAY)
+        grouping = Grouper(group_by)
+
+    if 'separate_raw' in cfg['input-output'] and cfg['input-output']['separate_raw']:
+        copier = RAWSeparateImageCopier(cfg['input-output']['output_dir'], cfg['input-output']['raw_dir_name'], grouping)
     else:
-        copier = ImageCopier(cfg['input-output']['output_dir'])
+        copier = ImageCopier(cfg['input-output']['output_dir'], grouping)
 
     images = ImageFile.get_images(cfg['input-output']['input_dir'])
 
@@ -56,5 +74,9 @@ if __name__ == "__main__":
     for image in images:
         i += 1
         progress_bar(i, progress_bar_length, prefix="Progress:", suffix="Complete", length=50, end="")
-        copier.copy(image)
+        try:
+            copier.copy(image)
+        except PermissionError as pe:
+            print("\n", pe) # TODO: Error handling
+
     print("All images copied.")

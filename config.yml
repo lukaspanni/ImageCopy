@@ -1,5 +1,0 @@
-input-output:
-  input_dir: E:/Dokumente/test/test1
-  output_dir: E:/Dokumente/test/test_output/
-  separate_raw: yes
-  raw_dir_name: RAW
