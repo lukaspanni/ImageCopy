@@ -3,3 +3,8 @@ input-output:
   output_dir: E:/Images/2020
   separate_raw: yes
   raw_dir_name: RAW
+grouping:
+  year: yes
+  month: yes
+  months_named: yes
+  day: no
