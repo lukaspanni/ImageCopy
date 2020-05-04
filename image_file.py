@@ -12,6 +12,13 @@ class ImageFile:
 
     @staticmethod
     def get_images(directory: Union[str, Path], filter_extensions: list = None) -> list:
+        """
+        Recursively loads a list of all image files in the specified directory or any subdirectory.
+        :param directory: start searching for image files here
+        :param filter_extensions: filter files by specific extensions. If None specified files are filtered by standard
+                RAW and JPG extensions
+        :return: list of ImageFile objects
+        """
         files = []
         if filter_extensions is None:
             filter_extensions = ImageFile.raw_extensions + ImageFile.image_extensions
@@ -33,6 +40,10 @@ class ImageFile:
         self.extension = ext
 
     def is_raw(self) -> bool:
+        """
+        Check if the file has a known RAW extension
+        :return:
+        """
         return self.extension in ImageFile.raw_extensions
 
     def get_creation_time(self) -> time.struct_time:
