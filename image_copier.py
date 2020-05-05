@@ -25,7 +25,7 @@ class ImageCopier:
         """
         destination = self.output_dir
         if self.grouping is not None:
-            destination += self.grouping.get_group_directory(image)
+            os.path.join(destination, self.grouping.get_group_directory(image))
         return destination
 
     def copy(self, image: ImageFile):
@@ -50,7 +50,7 @@ class RAWSeparateImageCopier(ImageCopier):
     def copy(self, image: ImageFile):
         destination_dir = self.get_destination_directory(image)
         if image.is_raw():
-            destination_dir = destination_dir + self.raw_dir_name
+            destination_dir = os.path.join(destination_dir, self.raw_dir_name)
         if not os.path.exists(destination_dir):
             os.makedirs(destination_dir, exist_ok=True)
         shutil.copy2(str(image), destination_dir)
