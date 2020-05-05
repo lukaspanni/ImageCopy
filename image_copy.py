@@ -1,4 +1,6 @@
 import os
+
+import piexif
 import yaml
 
 from grouper import GroupBy, Grouper
@@ -59,6 +61,13 @@ if __name__ == "__main__":
         if 'day' in cfg['grouping'] and cfg['grouping']['day']:
             group_by.add(GroupBy.DAY)
         grouping = Grouper(group_by)
+
+    if 'exif' in cfg:
+        exif_tags = dict()
+        if 'artist' in cfg['exif']:
+            exif_tags[piexif.ImageIFD.Artist] = cfg['exif']['artist']
+        if 'copyright' in cfg['exif']:
+            exif_tags[piexif.ImageIFD.Copyright] = cfg['exif']['copyright']
 
     if 'separate_raw' in cfg['input-output'] and cfg['input-output']['separate_raw']:
         copier = RAWSeparateImageCopier(cfg['input-output']['output_dir'], cfg['input-output']['raw_dir_name'], grouping)
