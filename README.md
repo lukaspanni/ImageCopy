@@ -1,4 +1,7 @@
 [![](https://img.shields.io/github/license/lukaspanni/ImageCopy.svg)](https://github.com/lukaspanni/ImageCopy/blob/master/LICENSE) 
+[![](https://img.shields.io/github/v/release/lukaspanni/ImageCopy)](https://github.com/lukaspanni/ImageCopy/releases/latest) 
+
+
 # ImageCopy
 
 Tool for fast and easy copying of RAW/JPG images from a camera to a hard drive.
