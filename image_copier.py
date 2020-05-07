@@ -30,7 +30,7 @@ class ImageCopier:
         """
         destination = self.output_dir
         if self.grouping is not None:
-            os.path.join(destination, self.grouping.get_group_directory(image))
+            destination = os.path.join(destination, self.grouping.get_group_directory(image))
         return destination
 
     def set_exif_data(self, image: ImageFile):
@@ -64,8 +64,8 @@ class RAWSeparateImageCopier(ImageCopier):
     Used to copy images and separate RAW and JPG images during copy.
     """
 
-    def __init__(self, output_dir: str, raw_dir_name: str, grouping: Optional[Grouper] = None):
-        super().__init__(output_dir, grouping)
+    def __init__(self, output_dir: str, raw_dir_name: str, grouping: Optional[Grouper] = None, exif_data: Optional[dict] = None):
+        super().__init__(output_dir, grouping, exif_data)
         self.raw_dir_name = raw_dir_name
 
     def copy(self, image: ImageFile):
