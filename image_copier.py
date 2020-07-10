@@ -7,6 +7,7 @@ import piexif
 from grouper import Grouper
 from image_file import ImageFile
 
+
 # TODO: Clean Solution for adding functionality like Grouping, EXIF-Changes, Renaming ...
 
 class ImageCopier:
@@ -64,7 +65,8 @@ class RAWSeparateImageCopier(ImageCopier):
     Used to copy images and separate RAW and JPG images during copy.
     """
 
-    def __init__(self, output_dir: str, raw_dir_name: str, grouping: Optional[Grouper] = None, exif_data: Optional[dict] = None):
+    def __init__(self, output_dir: str, raw_dir_name: str, grouping: Optional[Grouper] = None,
+                 exif_data: Optional[dict] = None):
         super().__init__(output_dir, grouping, exif_data)
         self.raw_dir_name = raw_dir_name
 

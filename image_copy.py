@@ -27,6 +27,9 @@ def progress_bar(iteration, total, prefix='', suffix='', decimals=1, length=100,
         print()
 
 
+# Idea:
+# get all Images (source paths) ->  create Groups and maybe additional steps (build output path) -> copy Images (-> additional Steps after copy)
+
 if __name__ == "__main__":
     config_file = "config.yml"
     config = Config(config_file)
