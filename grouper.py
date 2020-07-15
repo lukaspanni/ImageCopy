@@ -1,6 +1,5 @@
 from image_file import ImageFile
 from enum import Enum
-from time import localtime
 
 
 class GroupBy(Enum):

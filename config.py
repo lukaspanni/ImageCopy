@@ -3,7 +3,7 @@ import os
 import piexif
 import yaml
 
-from grouper import GroupBy, Grouper
+from GroupingTransform import GroupBy
 
 
 class Config:
@@ -70,7 +70,7 @@ class Config:
                     group_by.add(GroupBy.MONTH)
             if 'day' in self.cfg['grouping'] and self.cfg['grouping']['day']:
                 group_by.add(GroupBy.DAY)
-            self.group = Grouper(group_by)
+            self.group = group_by
 
     def _load_exif_config(self):
         """
