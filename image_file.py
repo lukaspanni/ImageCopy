@@ -2,38 +2,12 @@ import os
 import platform
 import time
 from pathlib import Path
-from typing import Union
 
 
 class ImageFile:
     raw_extensions = [".arw", ".srf", ".sr2", ".crw", ".cr2", ".cr3", ".dng", ".nef", ".nrw", ".raw", ".rw2", ".rwl",
                       ".orf", ".raf"]
     image_extensions = [".jpg", ".jpeg"]
-
-    @staticmethod
-    def get_images(directory: Union[str, Path], filter_extensions: list = None) -> list:
-        """
-        Recursively loads a list of all image files in the specified directory or any subdirectory.
-        :param directory: start searching for image files here
-        :param filter_extensions: filter files by specific extensions. If None specified files are filtered by standard
-                RAW and JPG extensions
-        :return: list of ImageFile objects
-        """
-        files = []
-        if filter_extensions is None:
-            filter_extensions = ImageFile.raw_extensions + ImageFile.image_extensions
-        for entry in Path(directory).iterdir():
-            if entry.is_file():
-                if filter_extensions is not None:
-                    name, ext = os.path.splitext(str(entry))
-                    ext = ext.lower()
-                    if ext in filter_extensions:
-                        files.append(ImageFile(entry, ext))
-                else:
-                    files.append(entry)
-            else:
-                files += ImageFile.get_images(entry, filter_extensions)
-        return files
 
     def __init__(self, path: Path, ext: str):
         self.path = path

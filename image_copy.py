@@ -1,6 +1,8 @@
+from GroupingTransform import GroupingTransform
+from ImageFinder import ImageFinder
+from RawSeparateTransform import RawSeparateTransform
 from config import Config
-from image_copier import ImageCopier, RAWSeparateImageCopier
-from image_file import ImageFile
+from image_copier import copy
 
 
 # https://stackoverflow.com/a/34325723
@@ -30,13 +32,7 @@ def progress_bar(iteration, total, prefix='', suffix='', decimals=1, length=100,
 if __name__ == "__main__":
     config_file = "config.yml"
     config = Config(config_file)
-
-    if config.io.separate_raw:
-        copier = RAWSeparateImageCopier(config.io.output_dir, config.io.raw_dir_name, config.group, config.exif)
-    else:
-        copier = ImageCopier(config.io.output_dir, config.group, config.exif)
-
-    images = ImageFile.get_images(config.io.input_dir)
+    images = ImageFinder.get_images(config.io.input_dir, config.io.output_dir)
 
     i = 0
     progress_bar_length = len(images)
@@ -46,7 +42,7 @@ if __name__ == "__main__":
         i += 1
         progress_bar(i, progress_bar_length, prefix="Progress:", suffix="Complete", length=50, end="")
         try:
-            copier.copy(image)
+            copy(image, images[image])
         except PermissionError as pe:
             print("\n", pe)  # TODO: Error handling
 
