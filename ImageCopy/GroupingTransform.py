@@ -52,15 +52,3 @@ class GroupingTransform(PathTransform):
         if GroupBy.DAY in self.grouping_config:
             group_directory += str(creation_time.tm_mday) + "/"
         return group_directory
-
-
-def test(input_dict):
-    for e in input_dict:
-        input_dict[e] += str(e)
-
-
-if __name__ == "__main__":
-    test_dict = {1: "Lol", 2: "LEL"}
-    print(test_dict)
-    test(test_dict)
-    print(test_dict)
