@@ -1,6 +1,7 @@
 from GroupingTransform import GroupingTransform
 from ImageFinder import ImageFinder
 from RawSeparateTransform import RawSeparateTransform
+from ActionRunner import ActionRunner
 from config import Config
 from image_copier import copy
 
@@ -33,6 +34,8 @@ if __name__ == "__main__":
     config_file = "config.yml"
     config = Config(config_file)
     images = ImageFinder.get_images(config.io.input_dir, config.io.output_dir)
+    runner = ActionRunner(config)
+    runner.execute_transform(images)
 
     i = 0
     progress_bar_length = len(images)
@@ -42,8 +45,10 @@ if __name__ == "__main__":
         i += 1
         progress_bar(i, progress_bar_length, prefix="Progress:", suffix="Complete", length=50, end="")
         try:
-            copy(image, images[image])
+            images[image] = copy(image, images[image])
         except PermissionError as pe:
             print("\n", pe)  # TODO: Error handling
 
     print("All images copied.")
+
+    runner.execute_after_actions(images)

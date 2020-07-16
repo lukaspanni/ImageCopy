@@ -34,7 +34,7 @@ class ImageFinder:
         for entry in Path(directory).iterdir():
             if entry.is_file():
                 if filter_extensions is not None:
-                    name, ext = os.path.splitext(str(entry))
+                    _, ext = os.path.splitext(str(entry))
                     ext = ext.lower()
                     if ext in filter_extensions:
                         files.append(ImageFile(entry, ext))
