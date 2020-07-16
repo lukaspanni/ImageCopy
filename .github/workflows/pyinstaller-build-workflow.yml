@@ -22,7 +22,9 @@ jobs:
         pip install pyinstaller
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Build with Pyinstaller
-      run: pyinstaller --onefile image_copy.py
+      run: |
+        cd ImageCopy
+        pyinstaller --onefile image_copy.py
     - name: Upload
       uses: actions/upload-artifact@v2
       with:
