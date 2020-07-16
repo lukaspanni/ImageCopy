@@ -1,6 +1,6 @@
 [![](https://img.shields.io/github/license/lukaspanni/ImageCopy.svg)](https://github.com/lukaspanni/ImageCopy/blob/master/LICENSE) 
 [![](https://img.shields.io/github/v/release/lukaspanni/ImageCopy)](https://github.com/lukaspanni/ImageCopy/releases/latest) 
-
+![Python application](https://github.com/lukaspanni/ImageCopy/workflows/Python%20application/badge.svg)
 
 # ImageCopy
 
