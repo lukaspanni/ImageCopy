@@ -1,9 +1,7 @@
-from GroupingTransform import GroupingTransform
-from ImageFinder import ImageFinder
-from RawSeparateTransform import RawSeparateTransform
-from ActionRunner import ActionRunner
-from config import Config
-from image_copier import copy
+from ImageCopy.ImageFinder import ImageFinder
+from ImageCopy.ActionRunner import ActionRunner
+from ImageCopy.config import Config
+from ImageCopy.image_copier import copy
 
 
 # https://stackoverflow.com/a/34325723

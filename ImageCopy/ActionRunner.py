@@ -1,9 +1,7 @@
-import os
-
-from ExifEditing import ExifEditing
-from GroupingTransform import GroupingTransform
-from RawSeparateTransform import RawSeparateTransform
-from config import Config
+from ImageCopy.ExifEditing import ExifEditing
+from ImageCopy.GroupingTransform import GroupingTransform
+from ImageCopy.RawSeparateTransform import RawSeparateTransform
+from ImageCopy.config import Config
 
 
 class ActionRunner:

@@ -1,6 +1,6 @@
 import os
 import shutil
-from image_file import ImageFile
+from ImageCopy.image_file import ImageFile
 
 
 def copy(image: ImageFile, destination: str):

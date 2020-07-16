@@ -1,8 +1,6 @@
-from typing import Optional
-
 import piexif
 
-from AfterCopyAction import AfterCopyAction
+from ImageCopy.AfterCopyAction import AfterCopyAction
 
 
 class ExifEditing(AfterCopyAction):
