@@ -1,6 +1,6 @@
 import piexif
 
-from ImageCopy.AfterCopyAction import AfterCopyAction
+from ImageCopy.Actions.AfterCopyAction import AfterCopyAction
 
 
 class ExifEditing(AfterCopyAction):
@@ -20,6 +20,7 @@ class ExifEditing(AfterCopyAction):
         exif_bytes = piexif.dump(exif)
         piexif.insert(exif_bytes, image)
 
-    def execute(self, output_paths: list):
-        for path in output_paths:
-            self.set_exif_data(path)
+    def execute(self, images: dict):
+        for img in images:
+            if not img.is_raw():
+                self.set_exif_data(images[img])

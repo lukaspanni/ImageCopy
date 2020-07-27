@@ -1,8 +1,8 @@
 import os
 from pathlib import Path
 
-from ImageCopy.RawSeparateTransform import RawSeparateTransform
-from ImageCopy.image_file import ImageFile
+from ImageCopy.Transformers.RawSeparateTransform import RawSeparateTransform
+from ImageCopy.ImageFile import ImageFile
 
 
 class TestRawSeparateTransform:

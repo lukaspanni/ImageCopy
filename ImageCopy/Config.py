@@ -3,7 +3,7 @@ import os
 import piexif
 import yaml
 
-from ImageCopy.GroupingTransform import GroupBy
+from ImageCopy.Transformers.GroupingTransform import GroupBy
 
 
 class Config:

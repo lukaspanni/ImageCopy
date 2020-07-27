@@ -4,8 +4,8 @@ from random import randrange, seed
 
 import pytest
 
-from ImageCopy.GroupingTransform import GroupingTransform, GroupBy
-from ImageCopy.image_file import ImageFile
+from ImageCopy.Transformers.GroupingTransform import GroupingTransform, GroupBy
+from ImageCopy.ImageFile import ImageFile
 
 
 class TestGroupingTransform:

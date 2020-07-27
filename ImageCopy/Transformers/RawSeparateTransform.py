@@ -1,6 +1,6 @@
 import os
 
-from ImageCopy.PathTransform import PathTransform
+from ImageCopy.Transformers.PathTransform import PathTransform
 
 
 class RawSeparateTransform(PathTransform):

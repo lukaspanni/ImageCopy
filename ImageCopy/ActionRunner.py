@@ -1,7 +1,7 @@
-from ImageCopy.ExifEditing import ExifEditing
-from ImageCopy.GroupingTransform import GroupingTransform
-from ImageCopy.RawSeparateTransform import RawSeparateTransform
-from ImageCopy.config import Config
+from ImageCopy.Actions.ExifEditing import ExifEditing
+from ImageCopy.Transformers.GroupingTransform import GroupingTransform
+from ImageCopy.Transformers.RawSeparateTransform import RawSeparateTransform
+from ImageCopy.Config import Config
 
 
 class ActionRunner:
@@ -25,6 +25,5 @@ class ActionRunner:
             transformer.transform(images)
 
     def execute_after_actions(self, images: dict):
-        image_paths = [path for path in images.values()]
         for action in self.after_actions:
-            action.execute(image_paths)
+            action.execute(images)

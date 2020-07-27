@@ -7,5 +7,5 @@ class AfterCopyAction(ABC):
     """
 
     @abstractmethod
-    def execute(self, output_paths: list):
+    def execute(self, images: dict):
         pass

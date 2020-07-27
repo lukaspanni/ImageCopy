@@ -1,7 +1,7 @@
 import os
 
-from ImageCopy.PathTransform import PathTransform
-from ImageCopy.image_file import ImageFile
+from ImageCopy.Transformers.PathTransform import PathTransform
+from ImageCopy.ImageFile import ImageFile
 from enum import Enum
 
 
