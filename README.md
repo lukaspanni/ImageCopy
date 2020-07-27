@@ -45,7 +45,7 @@ The following example shows how to use the grouping-feature:
 grouping:
   year: yes
   month: yes
-  months_named: yes
+  month_named: yes
   day: no
 ```
 
