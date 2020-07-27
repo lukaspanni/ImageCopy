@@ -23,7 +23,7 @@ def _load_grouping_config(config):
     if 'year' in config and config['year']:
         group_by.add(GroupBy.YEAR)
     if 'month' in config and config['month']:
-        if 'named_named' in config and config['months_named']:
+        if 'month_named' in config and config['month_named']:
             group_by.add(GroupBy.MONTH_NAMED)
         else:
             group_by.add(GroupBy.MONTH)

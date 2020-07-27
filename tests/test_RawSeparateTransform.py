@@ -6,7 +6,7 @@ from ImageCopy.ImageFile import ImageFile
 
 
 class TestRawSeparateTransform:
-    transform = RawSeparateTransform("RAW")
+    transform = RawSeparateTransform({"separate_raw": True, "raw_dir_name": "RAW"})
 
     def test_transform(self):
         imgs = [ImageFile(Path("/lol/img.raw"), ".raw"), ImageFile(Path("/lol/img.jmg"), ".jpg")]

@@ -11,5 +11,5 @@ raw_separate:
 grouping:
   year: yes
   month: yes
-  months_named: yes
+  month_named: yes
   day: no
