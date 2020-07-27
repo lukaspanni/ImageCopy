@@ -39,7 +39,7 @@ To create a separate folder for RAW-Images you have to set `separate_raw` to `ye
 
 Additionally there is the option to group images by creation date.
 You can choose to group images based on **year**, **month** and/or **date**. 
-If you choose to group by month you can enable `months_named`. This will create directories with the months name instead of its number.
+If you choose to group by month you can enable `month_named`. This will create directories with the months name instead of its number.
 The following example shows how to use the grouping-feature:
 ```yaml
 grouping:
