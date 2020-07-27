@@ -3,10 +3,22 @@ import piexif
 from ImageCopy.Actions.AfterCopyAction import AfterCopyAction
 
 
+def _load_exif_config(config: dict):
+    """
+    Load exif-config and create dict of exif-tags
+    """
+    exif = dict()
+    if 'artist' in config:
+        exif[piexif.ImageIFD.Artist] = config['artist']
+    if 'copyright' in config:
+        exif[piexif.ImageIFD.Copyright] = config['copyright']
+    return exif
+
+
 class ExifEditing(AfterCopyAction):
 
     def __init__(self, exif_data: dict):
-        self.exif_data = exif_data
+        self.exif_data = _load_exif_config(exif_data)
 
     def set_exif_data(self, image: str):
         """

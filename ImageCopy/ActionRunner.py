@@ -13,10 +13,10 @@ class ActionRunner:
         self.config = config
         self.path_transformers = []
         self.after_actions = []
-        if self.config.group is not None:
-            self.path_transformers.append(GroupingTransform(self.config.group))
-        if self.config.io.separate_raw:
-            self.path_transformers.append(RawSeparateTransform(config.io.raw_dir_name))
+        if self.config.grouping is not None:
+            self.path_transformers.append(GroupingTransform(self.config.grouping))
+        if self.config.raw_separate:
+            self.path_transformers.append(RawSeparateTransform(config.raw_separate))
         if self.config.exif is not None:
             self.after_actions.append(ExifEditing(self.config.exif))
 

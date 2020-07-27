@@ -1,6 +1,11 @@
+modules:
+  - grouping
+  - raw_separate
+  - exif
 input-output:
   input_dir: G:/
   output_dir: E:/Images/2020
+raw_separate:
   separate_raw: yes
   raw_dir_name: RAW
 grouping:
