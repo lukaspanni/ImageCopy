@@ -1,5 +1,6 @@
 import os
 import platform
+import shutil
 import time
 from pathlib import Path
 
@@ -40,3 +41,14 @@ class ImageFile:
 
     def __str__(self) -> str:
         return str(self.path)
+
+
+def copy(image: ImageFile, destination: str):
+    """
+    Copy the image to its new location.
+    :param image: image file to copy.
+    :param destination: destination directory
+    """
+    if not os.path.exists(destination):
+        os.makedirs(destination, exist_ok=True)
+    return shutil.copy2(str(image), destination)

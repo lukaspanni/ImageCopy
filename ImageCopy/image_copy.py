@@ -1,7 +1,7 @@
 from ImageCopy.ImageFinder import ImageFinder
 from ImageCopy.ActionRunner import ActionRunner
-from ImageCopy.config import Config
-from ImageCopy.image_copier import copy
+from ImageCopy.Config import Config
+from ImageCopy.ImageFile import copy
 
 
 # https://stackoverflow.com/a/34325723

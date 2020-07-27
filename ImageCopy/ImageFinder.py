@@ -2,7 +2,7 @@ import os
 from pathlib import Path
 from typing import Union
 
-from ImageCopy.image_file import ImageFile
+from ImageCopy.ImageFile import ImageFile
 
 
 class ImageFinder:
