@@ -2,6 +2,7 @@ modules:
   - grouping
   - raw_separate
   - exif
+  - greyscale
 input-output:
   input_dir: G:/
   output_dir: E:/Images/2020
@@ -10,6 +11,12 @@ raw_separate:
   raw_dir_name: RAW
 grouping:
   year: yes
-  month: yes
-  month_named: yes
+  month: no
+  month_named: no
   day: no
+exif:
+  artist: Lukas Panni
+  copyright: Lukas Panni
+greyscale:
+  algorithm: average
+  file_name: greyscale

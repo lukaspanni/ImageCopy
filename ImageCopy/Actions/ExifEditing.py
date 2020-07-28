@@ -16,6 +16,9 @@ def _load_exif_config(config: dict):
 
 
 class ExifEditing(AfterCopyAction):
+    """
+    Sets Exif-Data in copied Images
+    """
 
     def __init__(self, exif_data: dict):
         self.exif_data = _load_exif_config(exif_data)

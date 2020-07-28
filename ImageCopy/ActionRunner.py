@@ -1,3 +1,4 @@
+from ImageCopy.Actions.AutoGreyscale import AutoGreyscale
 from ImageCopy.Actions.ExifEditing import ExifEditing
 from ImageCopy.Transformers.GroupingTransform import GroupingTransform
 from ImageCopy.Transformers.RawSeparateTransform import RawSeparateTransform
@@ -19,6 +20,8 @@ class ActionRunner:
             self.path_transformers.append(RawSeparateTransform(config.raw_separate))
         if self.config.exif is not None:
             self.after_actions.append(ExifEditing(self.config.exif))
+        if self.config.greyscale is not None:
+            self.after_actions.append(AutoGreyscale(self.config.greyscale))
 
     def execute_transform(self, images: dict):
         for transformer in self.path_transformers:
