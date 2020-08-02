@@ -49,6 +49,12 @@ def copy(image: ImageFile, destination: str):
     :param image: image file to copy.
     :param destination: destination directory
     """
-    if not os.path.exists(destination):
-        os.makedirs(destination, exist_ok=True)
+    split_path = destination.split("/")
+    # Workaround to allow rename
+    if "." in split_path[-1]:
+        target_dir = "/".join(split_path[:-1])
+    else:
+        target_dir = destination
+    if not os.path.exists(target_dir):
+        os.makedirs(target_dir, exist_ok=True)
     return shutil.copy2(str(image), destination)

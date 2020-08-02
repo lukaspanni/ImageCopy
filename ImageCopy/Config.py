@@ -15,8 +15,12 @@ class Config:
             """
             if 'input_dir' in io_config and os.path.exists(io_config['input_dir']):
                 self.input_dir = io_config['input_dir']
+                if self.input_dir[-1] != "/":
+                    self.input_dir += "/"
             if 'output_dir' in io_config:
                 self.output_dir = io_config['output_dir']
+                if self.output_dir[-1] != "/":
+                    self.output_dir += "/"
 
     def __init__(self, config_path):
         """
