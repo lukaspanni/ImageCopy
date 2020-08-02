@@ -3,19 +3,17 @@ import os
 from ImageCopy.Transformers.PathTransform import PathTransform
 
 
-def _load_raw_separate_config(config: dict):
-    if 'separate_raw' in config and config['separate_raw']:
-        if 'raw_dir_name' in config:
-            return config['raw_dir_name']
-        else:
-            return "RAW"
-    return None
-
-
 class RawSeparateTransform(PathTransform):
+
     def __init__(self, config: dict):
-        super().__init__()
-        self.raw_dir_name = _load_raw_separate_config(config)
+        super().__init__(config)
+
+    def _load_config(self, config):
+        if 'separate_raw' in config and config['separate_raw']:
+            if 'raw_dir_name' in config:
+                self.raw_dir_name = config['raw_dir_name']
+            else:
+                self.raw_dir_name = "RAW"
 
     def transform(self, input_dict: dict):
         if self.raw_dir_name is None:

@@ -15,23 +15,6 @@ class GroupBy(Enum):
     DAY = 4
 
 
-def _load_grouping_config(config):
-    """
-    Load grouping config into set of group-actions.
-    """
-    group_by = set()
-    if 'year' in config and config['year']:
-        group_by.add(GroupBy.YEAR)
-    if 'month' in config and config['month']:
-        if 'month_named' in config and config['month_named']:
-            group_by.add(GroupBy.MONTH_NAMED)
-        else:
-            group_by.add(GroupBy.MONTH)
-    if 'day' in config and config['day']:
-        group_by.add(GroupBy.DAY)
-    return group_by
-
-
 class GroupingTransform(PathTransform):
     """
     Used to group images by creation time.
@@ -40,9 +23,20 @@ class GroupingTransform(PathTransform):
     month_names = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October",
                    "November", "December"]
 
-    def __init__(self, grouping_config: dict):
-        super().__init__()
-        self.grouping_config = _load_grouping_config(grouping_config)
+    def _load_config(self, config):
+        """
+        Load grouping config into set of group-actions.
+        """
+        self.grouping_config = set()
+        if 'year' in config and config['year']:
+            self.grouping_config.add(GroupBy.YEAR)
+        if 'month' in config and config['month']:
+            if 'month_named' in config and config['month_named']:
+                self.grouping_config.add(GroupBy.MONTH_NAMED)
+            else:
+                self.grouping_config.add(GroupBy.MONTH)
+        if 'day' in config and config['day']:
+            self.grouping_config.add(GroupBy.DAY)
 
     def transform(self, input_dict: dict):
         if len(self.grouping_config) < 1:
