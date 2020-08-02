@@ -3,6 +3,7 @@ from ImageCopy.Actions.ExifEditing import ExifEditing
 from ImageCopy.Transformers.GroupingTransform import GroupingTransform
 from ImageCopy.Transformers.RawSeparateTransform import RawSeparateTransform
 from ImageCopy.Config import Config
+from ImageCopy.Transformers.RenameTransform import RenameTransform
 
 
 class ActionRunner:
@@ -18,6 +19,8 @@ class ActionRunner:
             self.path_transformers.append(GroupingTransform(self.config.grouping))
         if self.config.raw_separate:
             self.path_transformers.append(RawSeparateTransform(config.raw_separate))
+        if self.config.rename:
+            self.path_transformers.append(RenameTransform(config.rename))
         if self.config.exif is not None:
             self.after_actions.append(ExifEditing(self.config.exif))
         if self.config.greyscale is not None:

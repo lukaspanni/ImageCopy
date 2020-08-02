@@ -12,8 +12,10 @@ class RawSeparateTransform(PathTransform):
         if 'separate_raw' in config and config['separate_raw']:
             if 'raw_dir_name' in config:
                 self.raw_dir_name = config['raw_dir_name']
+                if self.raw_dir_name[-1] != "/":
+                    self.raw_dir_name += "/"
             else:
-                self.raw_dir_name = "RAW"
+                self.raw_dir_name = "RAW/"
 
     def transform(self, input_dict: dict):
         if self.raw_dir_name is None:
