@@ -1,7 +1,10 @@
+"""
+Rename Feature
+"""
 import os
 import re
 
-from ImageCopy.Transformers.PathTransform import PathTransform
+from ImageCopy.Transformers.path_transform import PathTransform
 
 
 class RenameTransform(PathTransform):

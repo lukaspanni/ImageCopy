@@ -1,9 +1,12 @@
-from ImageCopy.Actions.AutoGreyscale import AutoGreyscale
-from ImageCopy.Actions.ExifEditing import ExifEditing
-from ImageCopy.Transformers.GroupingTransform import GroupingTransform
-from ImageCopy.Transformers.RawSeparateTransform import RawSeparateTransform
-from ImageCopy.Config import Config
-from ImageCopy.Transformers.RenameTransform import RenameTransform
+"""
+Action Runner
+"""
+from ImageCopy.Actions.auto_greyscale import AutoGreyscale
+from ImageCopy.Actions.exif_editing import ExifEditing
+from ImageCopy.Transformers.grouping_transform import GroupingTransform
+from ImageCopy.Transformers.raw_separate_transform import RawSeparateTransform
+from ImageCopy.config import Config
+from ImageCopy.Transformers.rename_transform import RenameTransform
 
 
 class ActionRunner:

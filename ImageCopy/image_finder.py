@@ -1,11 +1,17 @@
+"""
+Image Finder
+"""
 import os
 from pathlib import Path
 from typing import Union
 
-from ImageCopy.ImageFile import ImageFile
+from ImageCopy.image_file import ImageFile
 
 
 class ImageFinder:
+    """
+    Find all images in direcotry
+    """
     @staticmethod
     def get_images(directory: Union[str, Path], target_dir: Union[str, Path], filter_extensions: list = None) -> dict:
         """

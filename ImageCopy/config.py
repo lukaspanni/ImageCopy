@@ -1,12 +1,29 @@
+"""
+Configuration handling
+"""
 import os
-
 import yaml
 
 
 class Config:
+    """
+    Main Config class
+    """
+
     class _in_outConfig:
-        input_dir: str
-        output_dir: str
+        """
+        Config for input-output
+        """
+        _input_dir: str
+        _output_dir: str
+
+        @property
+        def input_dir(self):
+            return self._input_dir
+
+        @property
+        def output_dir(self):
+            return self._output_dir
 
         def __init__(self, io_config: dict):
             """
@@ -14,13 +31,13 @@ class Config:
             :param io_config:
             """
             if 'input_dir' in io_config and os.path.exists(io_config['input_dir']):
-                self.input_dir = io_config['input_dir']
-                if self.input_dir[-1] != "/":
-                    self.input_dir += "/"
+                self._input_dir = io_config['input_dir']
+                if self._input_dir[-1] != "/":
+                    self._input_dir += "/"
             if 'output_dir' in io_config:
-                self.output_dir = io_config['output_dir']
-                if self.output_dir[-1] != "/":
-                    self.output_dir += "/"
+                self._output_dir = io_config['output_dir']
+                if self._output_dir[-1] != "/":
+                    self._output_dir += "/"
 
     def __init__(self, config_path):
         """
@@ -56,3 +73,4 @@ class Config:
     def __getattr__(self, item):
         if item in self._cfg:
             return self._cfg[item]
+        return None

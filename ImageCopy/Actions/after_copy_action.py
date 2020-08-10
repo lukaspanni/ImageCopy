@@ -1,3 +1,6 @@
+"""
+After copy action abstract base class
+"""
 from abc import ABC, abstractmethod
 
 
@@ -8,4 +11,7 @@ class AfterCopyAction(ABC):
 
     @abstractmethod
     def execute(self, images: dict):
-        pass
+        """
+        Execute an after copy action
+        :param images: dictionary of ImageFile-objects and target paths
+        """

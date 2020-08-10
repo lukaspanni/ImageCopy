@@ -1,3 +1,6 @@
+"""
+Base for PathTransformers
+"""
 from abc import ABC, abstractmethod
 
 

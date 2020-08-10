@@ -1,6 +1,9 @@
+"""
+Exif-Editing Feature
+"""
 import piexif
 
-from ImageCopy.Actions.AfterCopyAction import AfterCopyAction
+from ImageCopy.Actions.after_copy_action import AfterCopyAction
 
 
 def _load_exif_config(config: dict):

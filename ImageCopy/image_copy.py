@@ -1,8 +1,12 @@
-from ImageCopy.ImageFinder import ImageFinder
-from ImageCopy.ActionRunner import ActionRunner
-from ImageCopy.Config import Config
-from ImageCopy.ImageFile import copy
+"""
+Main module for ImageCopy
+"""
+from ImageCopy.image_finder import ImageFinder
+from ImageCopy.action_runner import ActionRunner
+from ImageCopy.config import Config
+from ImageCopy.image_file import copy
 
+CONFIG_FILE = "config.yml"
 
 # https://stackoverflow.com/a/34325723
 # Print iterations progress
@@ -21,31 +25,29 @@ def progress_bar(iteration, total, prefix='', suffix='', decimals=1, length=100,
     """
     percent = ("{0:." + str(decimals) + "f}").format(100 * (iteration / float(total)))
     filled_length = int(length * iteration // total)
-    bar = fill * filled_length + '-' * (length - filled_length)
-    print('\r%s |%s| %s%% %s' % (prefix, bar, percent, suffix), end=end)
+    pr_bar = fill * filled_length + '-' * (length - filled_length)
+    print('\r%s |%s| %s%% %s' % (prefix, pr_bar, percent, suffix), end=end)
     # Print New Line on Complete
     if iteration == total:
         print()
 
 
 if __name__ == "__main__":
-    config_file = "config.yml"
-    config = Config(config_file)
+    config = Config(CONFIG_FILE)
     images = ImageFinder.get_images(config.io.input_dir, config.io.output_dir)
     runner = ActionRunner(config)
     runner.execute_transform(images)
 
     i = 0
-    progress_bar_length = len(images)
     print("Copying images from", config.io.input_dir, "to", config.io.output_dir)
-    progress_bar(i, progress_bar_length, prefix="Progress:", suffix="Complete", length=50, end="")
+    progress_bar(i, len(images), prefix="Progress:", suffix="Complete", length=50, end="")
     for image in images:
         i += 1
-        progress_bar(i, progress_bar_length, prefix="Progress:", suffix="Complete", length=50, end="")
+        progress_bar(i, len(images), prefix="Progress:", suffix="Complete", length=50, end="")
         try:
             images[image] = copy(image, images[image])
-        except PermissionError as pe:
-            print("\n", pe)  # TODO: Error handling
+        except PermissionError as per:
+            print("\n", per)  # TODO: Error handling
 
     print("All images copied.")
 

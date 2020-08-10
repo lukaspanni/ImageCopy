@@ -1,3 +1,6 @@
+"""
+Image File + copy
+"""
 import os
 import platform
 import shutil
@@ -6,6 +9,9 @@ from pathlib import Path
 
 
 class ImageFile:
+    """
+    Representation of an image
+    """
     raw_extensions = [".arw", ".srf", ".sr2", ".crw", ".cr2", ".cr3", ".dng", ".nef", ".nrw", ".raw", ".rw2", ".rwl",
                       ".orf", ".raf"]
     image_extensions = [".jpg", ".jpeg"]

@@ -1,8 +1,11 @@
+"""
+Grouping Feature
+"""
 import os
-
-from ImageCopy.Transformers.PathTransform import PathTransform
-from ImageCopy.ImageFile import ImageFile
 from enum import Enum
+
+from ImageCopy.Transformers.path_transform import PathTransform
+from ImageCopy.image_file import ImageFile
 
 
 class GroupBy(Enum):

@@ -1,8 +1,11 @@
+"""
+Auto greyscale
+"""
 import os
 import numpy as np
 from PIL import Image
-from ImageCopy.Actions.AfterCopyAction import AfterCopyAction
-from ImageCopy.Actions.GreyscaleConverter import GreyscaleConverter
+from ImageCopy.Actions.after_copy_action import AfterCopyAction
+from ImageCopy.Actions.greyscale_converter import GreyscaleConverter
 
 
 class AutoGreyscale(AfterCopyAction):
