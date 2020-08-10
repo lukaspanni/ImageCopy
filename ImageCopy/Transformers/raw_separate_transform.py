@@ -1,12 +1,15 @@
+"""
+Raw Separate Feature
+"""
 import os
 
-from ImageCopy.Transformers.PathTransform import PathTransform
+from ImageCopy.Transformers.path_transform import PathTransform
 
 
 class RawSeparateTransform(PathTransform):
-
-    def __init__(self, config: dict):
-        super().__init__(config)
+    """
+    Separate Raw files in different folder
+    """
 
     def _load_config(self, config):
         if 'separate_raw' in config and config['separate_raw']:

@@ -1,3 +1,7 @@
+# pylint: skip-file
+"""
+Functions for auto greyscale
+"""
 import numpy as np
 from numba import stencil, njit, cuda
 
@@ -90,7 +94,6 @@ class GreyscaleConverter:
     def execute(self, img_data):
         if not self.gpu:
             return algorithms[self.algorithm]["cpu"](img_data).astype(np.uint8)[:, :, 0]
-        else:
-            dev_arr = cuda.to_device(img_data)
-            algorithms[self.algorithm]["gpu"][(32, 32), (16, 16)](dev_arr)
-            return dev_arr.copy_to_host()
+        dev_arr = cuda.to_device(img_data)
+        algorithms[self.algorithm]["gpu"][(32, 32), (16, 16)](dev_arr)
+        return dev_arr.copy_to_host()

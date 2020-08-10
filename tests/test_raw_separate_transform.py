@@ -1,11 +1,17 @@
+"""
+Tests for RawSeparate
+"""
 import os
 from pathlib import Path
 
-from ImageCopy.Transformers.RawSeparateTransform import RawSeparateTransform
-from ImageCopy.ImageFile import ImageFile
+from ImageCopy.Transformers.raw_separate_transform import RawSeparateTransform
+from ImageCopy.image_file import ImageFile
 
 
 class TestRawSeparateTransform:
+    """
+    Testsuite for raw separate
+    """
     transform = RawSeparateTransform({"separate_raw": True, "raw_dir_name": "RAW"})
 
     def test_transform(self):
@@ -13,5 +19,5 @@ class TestRawSeparateTransform:
         test_dict = {img: "/output/" for img in imgs}
         expected_output = [os.path.join("/output/", "RAW/"), "/output/"]
         self.transform.transform(test_dict)
-        actual_output = [v for v in test_dict.values()]
+        actual_output = list(test_dict.values())
         assert actual_output == expected_output
