@@ -52,6 +52,7 @@ class ImageFile:
 def copy(image: ImageFile, destination: str):
     """
     Copy the image to its new location.
+
     :param image: image file to copy.
     :param destination: destination directory
     """
