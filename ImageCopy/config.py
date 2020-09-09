@@ -28,6 +28,7 @@ class Config:
         def __init__(self, io_config: dict):
             """
             Load input-output configuration.
+
             :param io_config:
             """
             if 'input_dir' in io_config and os.path.exists(io_config['input_dir']):
@@ -41,7 +42,8 @@ class Config:
 
     def __init__(self, config_path):
         """
-        Crate Config-Object and load configuration from config_path.
+        Create Config-Object and load configuration from config_path.
+
         :param config_path: path to yaml config-file
         """
         if not os.path.exists(config_path):
@@ -56,7 +58,7 @@ class Config:
 
     def _load_config(self):
         """
-
+        Load configuration for every specified module
         """
         if self._cfg is not None:
             if "modules" in self._cfg:
