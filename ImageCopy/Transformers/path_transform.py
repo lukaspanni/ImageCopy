@@ -6,7 +6,7 @@ from abc import ABC, abstractmethod
 
 class PathTransform(ABC):
     """
-    Transform ImageFile-Dictionary output path
+    Base class for other transformers
     """
 
     def __init__(self, config: dict):
@@ -14,8 +14,18 @@ class PathTransform(ABC):
 
     @abstractmethod
     def transform(self, input_dict: dict):
+        """
+        Execute transformation on images
+
+        :param input_dict: dictionary of images with output-path
+        """
         pass
 
     @abstractmethod
     def _load_config(self, config):
+        """
+        Load config for current transformer
+
+        :param config: configuration dictionary for current transformer
+        """
         pass

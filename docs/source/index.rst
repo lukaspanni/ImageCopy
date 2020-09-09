@@ -10,7 +10,7 @@ Welcome to ImageCopy's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   usage
+   overview
    main
    transformers
    actions
