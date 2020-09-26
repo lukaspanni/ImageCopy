@@ -1,6 +1,8 @@
 """
 Action Runner
 """
+from typing import Callable
+
 from ImageCopy.Actions.auto_greyscale import AutoGreyscale
 from ImageCopy.Actions.exif_editing import ExifEditing
 from ImageCopy.Transformers.grouping_transform import GroupingTransform
@@ -38,11 +40,16 @@ class ActionRunner:
         for transformer in self.path_transformers:
             transformer.transform(images)
 
-    def execute_after_actions(self, images: dict):
+    def get_after_action_count(self):
+        return len(self.after_actions)
+
+    def execute_after_actions(self, images: dict, register_progress: Callable):
         """
         Execute configured after copy actions for every image
 
         :param images: dictionary of images with output-path
+        :param register_progress:  function to register progress
         """
         for action in self.after_actions:
             action.execute(images)
+            register_progress()
