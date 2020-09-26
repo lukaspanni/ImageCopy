@@ -52,4 +52,18 @@ if __name__ == "__main__":
 
     print("All images copied.")
 
-    runner.execute_after_actions(images)
+    action_count = runner.get_after_action_count()
+    if action_count < 1:
+        exit()
+
+    print("Executing after copy actions", config.io.input_dir, "to", config.io.output_dir)
+    j = 0
+    progress_bar(j, action_count, prefix="Progress:", suffix="Complete", length=50, end="")
+
+
+    def add_progress():
+        global j
+        j += 1
+        progress_bar(j, action_count, prefix="Progress:", suffix="Complete", length=50, end="")
+
+    runner.execute_after_actions(images, add_progress)
