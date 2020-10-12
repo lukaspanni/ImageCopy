@@ -29,10 +29,20 @@ class ActionRunner:
         if self.config.greyscale is not None:
             self.after_actions.append(AutoGreyscale(self.config.greyscale))
 
-    def execute_transform(self, images: dict):
+    def execute_transformers(self, images: dict):
+        """
+        Execute configured transformers for every image
+
+        :param images: dictionary of images with output-path
+        """
         for transformer in self.path_transformers:
             transformer.transform(images)
 
     def execute_after_actions(self, images: dict):
+        """
+        Execute configured after copy actions for every image
+
+        :param images: dictionary of images with output-path
+        """
         for action in self.after_actions:
             action.execute(images)
