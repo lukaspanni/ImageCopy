@@ -6,12 +6,13 @@ from abc import ABC, abstractmethod
 
 class AfterCopyAction(ABC):
     """
-    Execute actions after copying images
+    Base class for executing actions after copying
     """
 
     @abstractmethod
     def execute(self, images: dict):
         """
         Execute an after copy action
-        :param images: dictionary of ImageFile-objects and target paths
+
+        :param images: dictionary of images with output-path
         """

@@ -8,6 +8,7 @@ from ImageCopy.image_file import copy
 
 CONFIG_FILE = "config.yml"
 
+
 # https://stackoverflow.com/a/34325723
 # Print iterations progress
 def progress_bar(iteration, total, prefix='', suffix='', decimals=1, length=100, fill='█', end="\r"):
@@ -34,9 +35,9 @@ def progress_bar(iteration, total, prefix='', suffix='', decimals=1, length=100,
 
 if __name__ == "__main__":
     config = Config(CONFIG_FILE)
-    images = ImageFinder.get_images(config.io.input_dir, config.io.output_dir)
+    images = ImageFinder.get_images_dict(config.io.input_dir, config.io.output_dir)
     runner = ActionRunner(config)
-    runner.execute_transform(images)
+    runner.execute_transformers(images)
 
     i = 0
     print("Copying images from", config.io.input_dir, "to", config.io.output_dir)
