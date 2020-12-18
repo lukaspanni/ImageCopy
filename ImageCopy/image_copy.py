@@ -5,6 +5,7 @@ from ImageCopy.image_finder import ImageFinder
 from ImageCopy.action_runner import ActionRunner
 from ImageCopy.config import Config
 from ImageCopy.image_file import copy
+from multiprocessing import Process, Queue
 
 CONFIG_FILE = "config.yml"
 
@@ -39,6 +40,14 @@ if __name__ == "__main__":
     runner = ActionRunner(config)
     runner.execute_transformers(images)
 
+    after_copy_actions = runner.get_after_action_count() > 0
+    if after_copy_actions:
+        after_copy_queue = Queue()
+        feedback_queue = Queue()
+        after_copy_process = Process(target=runner.after_action_process,
+                                     args=(runner.after_actions, after_copy_queue, feedback_queue))
+        after_copy_process.start()
+
     i = 0
     print("Copying images from", config.io.input_dir, "to", config.io.output_dir)
     progress_bar(i, len(images), prefix="Progress:", suffix="Complete", length=50, end="")
@@ -47,23 +56,18 @@ if __name__ == "__main__":
         progress_bar(i, len(images), prefix="Progress:", suffix="Complete", length=50, end="")
         try:
             images[image] = copy(image, images[image])
+            if after_copy_actions:
+                after_copy_queue.put({image: images[image]})
         except PermissionError as per:
             print("\n", per)  # TODO: Error handling
 
     print("All images copied.")
 
-    action_count = runner.get_after_action_count()
-    if action_count < 1:
+    if not after_copy_actions:
         exit()
 
-    print("Executing after copy actions", config.io.input_dir, "to", config.io.output_dir)
-    j = 0
-    progress_bar(j, action_count, prefix="Progress:", suffix="Complete", length=50, end="")
+    print("Executing after copy actions")
+    while not (counter := feedback_queue.get()) == "END":
+        progress_bar(counter, len(images), prefix="Progress:", suffix="Complete", length=50, end="")
 
-
-    def add_progress():
-        global j
-        j += 1
-        progress_bar(j, action_count, prefix="Progress:", suffix="Complete", length=50, end="")
-
-    runner.execute_after_actions(images, add_progress)
+    # runner.execute_after_actions(images, add_progress)

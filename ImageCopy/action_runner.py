@@ -1,9 +1,10 @@
 """
 Action Runner
 """
+from multiprocessing import Queue
 from typing import Callable
 
-from ImageCopy.Actions.auto_greyscale import AutoGreyscale
+# from ImageCopy.Actions.auto_greyscale import AutoGreyscale
 from ImageCopy.Actions.exif_editing import ExifEditing
 from ImageCopy.Transformers.grouping_transform import GroupingTransform
 from ImageCopy.Transformers.raw_separate_transform import RawSeparateTransform
@@ -28,8 +29,8 @@ class ActionRunner:
             self.path_transformers.append(RenameTransform(config.rename))
         if self.config.exif is not None:
             self.after_actions.append(ExifEditing(self.config.exif))
-        if self.config.greyscale is not None:
-            self.after_actions.append(AutoGreyscale(self.config.greyscale))
+        # if self.config.greyscale is not None:
+        #    self.after_actions.append(AutoGreyscale(self.config.greyscale))
 
     def execute_transformers(self, images: dict):
         """
@@ -53,3 +54,13 @@ class ActionRunner:
         for action in self.after_actions:
             action.execute(images)
             register_progress()
+
+    @staticmethod
+    def after_action_process(after_actions: list, image_queue: Queue, feedback_queue: Queue):
+        counter = 0
+        while not (command := image_queue.get()) == "END":
+            if type(command) is dict:
+                for action in after_actions:
+                    action.execute(command)
+                counter += 1
+                feedback_queue.put(counter)
