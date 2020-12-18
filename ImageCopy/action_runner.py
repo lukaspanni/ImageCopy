@@ -64,3 +64,4 @@ class ActionRunner:
                     action.execute(command)
                 counter += 1
                 feedback_queue.put(counter)
+        feedback_queue.put("END")

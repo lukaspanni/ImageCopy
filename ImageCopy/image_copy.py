@@ -60,7 +60,7 @@ if __name__ == "__main__":
                 after_copy_queue.put({image: images[image]})
         except PermissionError as per:
             print("\n", per)  # TODO: Error handling
-
+    after_copy_queue.put("END")
     print("All images copied.")
 
     if not after_copy_actions:
