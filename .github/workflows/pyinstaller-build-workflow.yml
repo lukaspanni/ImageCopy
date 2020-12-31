@@ -2,7 +2,7 @@ name: Pyinstaller build
 
 on:
   push:
-    branches: [ master, Exif_editing, dev, release_test ]
+    branches: [ release ]
 
 jobs:
   build:
