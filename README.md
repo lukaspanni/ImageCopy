@@ -17,7 +17,7 @@ Tool for fast and easy copying of RAW/JPG images from a camera to a hard drive.
     - Day
 
 - Set EXIF Data in JPG images (artist and copyright)
-- Create a greyscale copy of JPG images
+- Create a greyscale copy of JPG images (just for fun, not really a useful feature :smile:)
 
 ## Planned Features
 
