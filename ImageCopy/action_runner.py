@@ -4,7 +4,7 @@ Action Runner
 from multiprocessing import Queue
 from typing import Callable
 
-# from ImageCopy.Actions.auto_greyscale import AutoGreyscale
+from ImageCopy.Actions.auto_greyscale import AutoGreyscale
 from ImageCopy.Actions.exif_editing import ExifEditing
 from ImageCopy.Transformers.grouping_transform import GroupingTransform
 from ImageCopy.Transformers.raw_separate_transform import RawSeparateTransform
@@ -29,8 +29,8 @@ class ActionRunner:
             self.path_transformers.append(RenameTransform(config.rename))
         if self.config.exif is not None:
             self.after_actions.append(ExifEditing(self.config.exif))
-        # if self.config.greyscale is not None:
-        #    self.after_actions.append(AutoGreyscale(self.config.greyscale))
+        if self.config.greyscale is not None:
+            self.after_actions.append(AutoGreyscale(self.config.greyscale))
 
     def execute_transformers(self, images: dict):
         """

@@ -4,7 +4,7 @@ Main module for ImageCopy
 from ImageCopy.image_finder import ImageFinder
 from ImageCopy.action_runner import ActionRunner
 from ImageCopy.config import Config
-from ImageCopy.image_file import copy
+from ImageCopy.copier import Copier
 from multiprocessing import Process, Queue
 
 CONFIG_FILE = "config.yml"
@@ -51,11 +51,12 @@ if __name__ == "__main__":
     i = 0
     print("Copying images from", config.io.input_dir, "to", config.io.output_dir)
     progress_bar(i, len(images), prefix="Progress:", suffix="Complete", length=50, end="")
+    copier = Copier(config)
     for image in images:
         i += 1
         progress_bar(i, len(images), prefix="Progress:", suffix="Complete", length=50, end="")
         try:
-            images[image] = copy(image, images[image])
+            images[image] = copier.copy(image, images[image])
             if after_copy_actions:
                 after_copy_queue.put({image: images[image]})
         except PermissionError as per:
