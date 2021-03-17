@@ -18,19 +18,18 @@ class ActionRunner:
     """
 
     def __init__(self, config: Config):
-        self.config = config
         self.path_transformers = []
         self.after_actions = []
-        if self.config.grouping is not None:
-            self.path_transformers.append(GroupingTransform(self.config.grouping))
-        if self.config.raw_separate:
+        if config.grouping:
+            self.path_transformers.append(GroupingTransform(config.grouping))
+        if config.raw_separate:
             self.path_transformers.append(RawSeparateTransform(config.raw_separate))
-        if self.config.rename:
+        if config.rename:
             self.path_transformers.append(RenameTransform(config.rename))
-        if self.config.exif is not None:
-            self.after_actions.append(ExifEditing(self.config.exif))
-        if self.config.greyscale is not None:
-            self.after_actions.append(AutoGreyscale(self.config.greyscale))
+        if config.exif:
+            self.after_actions.append(ExifEditing(config.exif))
+        if config.greyscale:
+            self.after_actions.append(AutoGreyscale(config.greyscale))
 
     def execute_transformers(self, images: dict):
         """

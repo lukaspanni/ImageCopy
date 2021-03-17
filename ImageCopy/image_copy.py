@@ -41,12 +41,13 @@ if __name__ == "__main__":
     runner.execute_transformers(images)
 
     after_copy_actions = runner.get_after_action_count() > 0
+    after_copy_queue = Queue()
+    feedback_queue = Queue()
     if after_copy_actions:
-        after_copy_queue = Queue()
-        feedback_queue = Queue()
         after_copy_process = Process(target=runner.after_action_process,
                                      args=(runner.after_actions, after_copy_queue, feedback_queue))
         after_copy_process.start()
+
 
     i = 0
     print("Copying images from", config.io.input_dir, "to", config.io.output_dir)
