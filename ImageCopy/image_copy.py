@@ -58,7 +58,7 @@ if __name__ == "__main__":
         progress_bar(i, len(images), prefix="Progress:", suffix="Complete", length=50, end="")
         try:
             images[image] = copier.copy(image, images[image])
-            if after_copy_actions:
+            if after_copy_actions and images[image] is not None:
                 after_copy_queue.put({image: images[image]})
         except PermissionError as per:
             print("\n", per)  # TODO: Error handling

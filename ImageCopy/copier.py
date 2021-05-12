@@ -57,6 +57,6 @@ class Copier:
                 destination = destination[:-len(image.extension)] + "_" + str(int(time.time())) + image.extension
         if self.mode == Copier.OverwriteOptions.NO_OVERWRITE:
             if os.path.exists(destination):
-                return  # TODO: don't execute after-copy actions!
+                return None
 
         return shutil.copy2(str(image), destination)
