@@ -19,6 +19,9 @@ class RawSeparateTransform(PathTransform):
                     self.raw_dir_name += "/"
             else:
                 self.raw_dir_name = "RAW/"
+            return
+        self.raw_dir_name = None
+
 
     def transform(self, input_dict: dict):
         if self.raw_dir_name is None:

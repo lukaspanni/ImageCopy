@@ -16,14 +16,15 @@ class RenameTransform(PathTransform):
         """
         Load rename config
         """
-        if "in" in config:
+        if "in" in config and isinstance(config["in"], str):
             self.in_str = config["in"]
-            if "out" in config:
-                self.out_str = config["out"]
-            else:
-                raise ValueError("Invalid rename-config, regex_out missing")
         else:
             raise ValueError("Invalid rename-config, regex_in missing")
+
+        if "out" in config and isinstance(config["out"], str):
+            self.out_str = config["out"]
+        else:
+            raise ValueError("Invalid rename-config, regex_out missing")
 
     def transform(self, input_dict: dict):
         """
