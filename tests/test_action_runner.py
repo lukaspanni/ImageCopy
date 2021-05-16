@@ -6,7 +6,7 @@ from ImageCopy.Transformers.grouping_transform import GroupingTransform
 from ImageCopy.Transformers.raw_separate_transform import RawSeparateTransform
 from ImageCopy.Transformers.rename_transform import RenameTransform
 from ImageCopy.action_runner import ActionRunner
-from tests.mocks import MockConfig, MockTransformer, MockAction
+from tests.mock.mocks import MockConfig, MockTransformer, MockAction
 
 
 class TestActionRunner:
