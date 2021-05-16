@@ -13,11 +13,20 @@ class TestRawSeparateTransform:
     Testsuite for raw separate
     """
 
-    def test_transform(self):
+    def test_transform_raw_separated(self):
         transform = RawSeparateTransform({"separate_raw": True, "raw_dir_name": "RAW"})
-        imgs = [ImageFile(Path("/lol/img.raw"), ".raw"), ImageFile(Path("/lol/img.jmg"), ".jpg")]
+        imgs = [ImageFile(Path("/lol/img.raw"), ".raw"), ImageFile(Path("/lol/img1.arw"), ".arw")]
         test_dict = {img: "/output/" for img in imgs}
-        expected_output = [os.path.join("/output/", "RAW/"), "/output/"]
+        expected_output = [os.path.join("/output/", "RAW/"), os.path.join("/output/", "RAW/")]
+        transform.transform(test_dict)
+        actual_output = list(test_dict.values())
+        assert actual_output == expected_output
+
+    def test_transform_jpg_not_separated(self):
+        transform = RawSeparateTransform({"separate_raw": True, "raw_dir_name": "RAW"})
+        imgs = [ImageFile(Path("/lol/img.jpg"), ".jpg"), ImageFile(Path("/lol/img1.jpeg"), ".jpeg")]
+        test_dict = {img: "/output/" for img in imgs}
+        expected_output = ["/output/", "/output/"]
         transform.transform(test_dict)
         actual_output = list(test_dict.values())
         assert actual_output == expected_output

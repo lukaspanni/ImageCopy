@@ -7,6 +7,7 @@ from ImageCopy.Transformers.rename_transform import RenameTransform
 from ImageCopy.image_file import ImageFile
 from pathlib import Path
 
+
 class TestRenameTransform:
     """
     Testsuite for rename
