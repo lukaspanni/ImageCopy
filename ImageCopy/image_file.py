@@ -3,7 +3,6 @@ Image File + copy
 """
 import os
 import platform
-import shutil
 import time
 from pathlib import Path
 
@@ -50,20 +49,3 @@ class ImageFile:
     def __str__(self) -> str:
         return str(self.path)
 
-
-def copy(image: ImageFile, destination: str):
-    """
-    Copy the given image to its new location.
-
-    :param image: image file to copy.
-    :param destination: destination directory with or without new filename
-    """
-    split_path = destination.split("/")
-    # Workaround to allow rename
-    if "." in split_path[-1]:
-        target_dir = "/".join(split_path[:-1])
-    else:
-        target_dir = destination
-    if not os.path.exists(target_dir):
-        os.makedirs(target_dir, exist_ok=True)
-    return shutil.copy2(str(image), destination)
