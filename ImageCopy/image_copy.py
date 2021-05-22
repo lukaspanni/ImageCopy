@@ -4,7 +4,7 @@ Main module for ImageCopy
 from ImageCopy.image_finder import ImageFinder
 from ImageCopy.action_runner import ActionRunner
 from ImageCopy.config import Config
-from ImageCopy.image_file import copy
+from ImageCopy.copier import Copier
 from multiprocessing import Process, Queue
 
 CONFIG_FILE = "config.yml"
@@ -41,22 +41,24 @@ if __name__ == "__main__":
     runner.execute_transformers(images)
 
     after_copy_actions = runner.get_after_action_count() > 0
+    after_copy_queue = Queue()
+    feedback_queue = Queue()
     if after_copy_actions:
-        after_copy_queue = Queue()
-        feedback_queue = Queue()
         after_copy_process = Process(target=runner.after_action_process,
                                      args=(runner.after_actions, after_copy_queue, feedback_queue))
         after_copy_process.start()
 
+
     i = 0
     print("Copying images from", config.io.input_dir, "to", config.io.output_dir)
     progress_bar(i, len(images), prefix="Progress:", suffix="Complete", length=50, end="")
+    copier = Copier(config)
     for image in images:
         i += 1
         progress_bar(i, len(images), prefix="Progress:", suffix="Complete", length=50, end="")
         try:
-            images[image] = copy(image, images[image])
-            if after_copy_actions:
+            images[image] = copier.copy(image, images[image])
+            if after_copy_actions and images[image] is not None:
                 after_copy_queue.put({image: images[image]})
         except PermissionError as per:
             print("\n", per)  # TODO: Error handling

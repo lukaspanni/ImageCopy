@@ -18,15 +18,17 @@ class ActionRunner:
     """
 
     def __init__(self, config: Config):
+        if config is None or not isinstance(config, Config):
+            raise ValueError("No valid Config-Object provided")
         self.config = config
         self.path_transformers = []
         self.after_actions = []
         if self.config.grouping is not None:
             self.path_transformers.append(GroupingTransform(self.config.grouping))
-        if self.config.raw_separate:
-            self.path_transformers.append(RawSeparateTransform(config.raw_separate))
-        if self.config.rename:
-            self.path_transformers.append(RenameTransform(config.rename))
+        if self.config.raw_separate is not None:
+            self.path_transformers.append(RawSeparateTransform(self.config.raw_separate))
+        if self.config.rename is not None:
+            self.path_transformers.append(RenameTransform(self.config.rename))
         if self.config.exif is not None:
             self.after_actions.append(ExifEditing(self.config.exif))
         # if self.config.greyscale is not None:
