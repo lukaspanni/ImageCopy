@@ -71,3 +71,21 @@ class TestActionRunner:
         runner.execute_after_actions(input_dict, lambda: None)
         assert all(action.execute_called for action in mockActions)
         assert all(action.execute_called_with == input_dict for action in mockActions)
+
+    def test_execute_actions_register_progress(self):
+
+        class Counter:
+            def __init__(self):
+                self.progress_counter = 0
+
+            def progress(self):
+                self.progress_counter += 1
+
+        mockConfig = MockConfig()
+        mockActions = [MockAction() for x in range(random.randint(1, 20))]
+        runner = ActionRunner(mockConfig)
+        input_dict = {'test': True, 'x': 42}
+        runner.after_actions = mockActions
+        counter = Counter()
+        runner.execute_after_actions(input_dict, counter.progress)
+        assert counter.progress_counter == len(mockActions)
