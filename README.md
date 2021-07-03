@@ -6,6 +6,15 @@
 
 Tool for fast and easy copying of RAW/JPG images from a camera to a hard drive.
 
+## Features (version 2.1)
+
+- Features of version 2.0 (Greyscale is disabled in the release but can be enabled if built from source)
+- Configuration for already existing Files
+    - Always overwrite: silently overwrite already existing files
+    - Never overwrite: silently ignore already existing files
+    - Warn: overwrite already existing files, but warn user that files are overwritten
+    - Append Suffix: append a suffix to files with the same filename
+
 ## Features (version 2.0)
 
 - Search and copy all image files automatically.
@@ -28,7 +37,7 @@ Tool for fast and easy copying of RAW/JPG images from a camera to a hard drive.
 
 ### Create a config.yml file 
 
-**Reccomendation:** rename the config.example.yml and adjust settings there.
+**Recommendation:** rename the config.example.yml and adjust settings there.
    
 **Module config:** list of modules to use.
 ````yaml
@@ -36,7 +45,6 @@ modules:
   - grouping
   - raw_separate
   - exif
-  - greyscale
 ````
   
 Basic Config (copies all images from `input_dir` including all subdirectories to `output_dir`): 
@@ -46,9 +54,22 @@ input-output:
   output_dir: /home/img/
 ```
 
+Copy-Configuration (configures handling of already existing files in output_dir)
+```yaml
+copy:
+  mode: append-suffix
+```
+
+Available Config-Options:
+
+- "always-overwrite": silently overwrite already existing files
+- "warn-before-overwrite": silently ignore already existing files
+- "never-overwrite":  overwrite already existing files, but warn user that files are overwritten
+- "append-suffix": append a suffix to files with the same filename
+
 #### Modules
 
-Currently (Version 2.0) available: 
+Currently (Version 2.1) available: 
 
 - grouping 
     
