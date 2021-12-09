@@ -63,8 +63,8 @@ copy:
 Available Config-Options:
 
 - "always-overwrite": silently overwrite already existing files
-- "warn-before-overwrite": silently ignore already existing files
-- "never-overwrite":  overwrite already existing files, but warn user that files are overwritten
+- "warn-before-overwrite": overwrite already existing files, but warn user that files are overwritten
+- "never-overwrite": silently ignore already existing files
 - "append-suffix": append a suffix to files with the same filename
 
 #### Modules
