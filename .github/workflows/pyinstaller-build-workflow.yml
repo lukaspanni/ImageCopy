@@ -2,7 +2,8 @@ name: Pyinstaller build
 
 on:
   push:
-    branches: [ release ]
+    tags:
+      - '*'
 
 jobs:
   build:
