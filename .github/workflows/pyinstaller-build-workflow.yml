@@ -4,6 +4,7 @@ on:
   push:
     tags:
       - "*"
+  workflow_dispatch:
 
 jobs:
   build:
@@ -37,11 +38,23 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
       - uses: actions/download-artifact@v2 # download all artifacts
-      - name: Release
+      - run: ls -la
+
+      - run: |
+          sudo apt install zip -y
+          zip -r image_copy_Linux.zip image_copy_Linux
+          zip -r image_copy_Windows.zip image_copy_Windows
+          zip -r image_copy_macOS.zip image_copy_macOS
+
+      - name: Release # create release
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            image_copy_Linux
-            image_copy_Windows
-            image_copy_macOS
+            image_copy_Linux.zip
+            image_copy_Windows.zip
+            image_copy_macOS.zip
+
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
