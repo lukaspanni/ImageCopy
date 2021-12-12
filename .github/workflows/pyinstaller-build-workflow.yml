@@ -3,7 +3,7 @@ name: Pyinstaller build
 on:
   push:
     tags:
-      - '*'
+      - "*"
 
 jobs:
   build:
@@ -12,22 +12,36 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python 3.8
-      uses: actions/setup-python@v1
-      with:
-        python-version: 3.8
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install pyinstaller
-        pip install -r requirements.txt
-    - name: Build with Pyinstaller
-      run: |
-        cd ImageCopy
-        pyinstaller --onefile image_copy.py
-    - name: Upload
-      uses: actions/upload-artifact@v2
-      with:
-        name: image_copy${{runner.os}}
-        path: ImageCopy/dist/
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.8
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyinstaller
+          pip install -r requirements.txt
+      - name: Build with Pyinstaller
+        run: |
+          cd ImageCopy
+          pyinstaller --onefile image_copy.py
+      - name: Upload
+        uses: actions/upload-artifact@v2
+        with:
+          name: image_copy_${{runner.os}}
+          path: ImageCopy/dist/
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - uses: actions/download-artifact@v2 # download all artifacts
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            image_copy_Linux
+            image_copy_Windows
+            image_copy_macOS
