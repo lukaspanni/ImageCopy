@@ -34,8 +34,8 @@ def progress_bar(iteration, total, prefix='', suffix='', decimals=1, length=100,
         print()
 
 
-if __name__ == "__main__":
-    config = Config(CONFIG_FILE)
+def main(config_file):
+    config = Config(config_file)
     images = ImageFinder.get_images_dict(config.io.input_dir, config.io.output_dir)
     runner = ActionRunner(config)
     runner.execute_transformers(images)
@@ -72,4 +72,5 @@ if __name__ == "__main__":
     while not (counter := feedback_queue.get()) == "END":
         progress_bar(counter, len(images), prefix="Progress:", suffix="Complete", length=50, end="")
 
-    # runner.execute_after_actions(images, add_progress)
+if __name__ == "__main__":
+    main(CONFIG_FILE)
