@@ -45,8 +45,6 @@ class Copier:
         if not os.path.exists(target_dir):
             os.makedirs(target_dir, exist_ok=True)
 
-        destination = os.path.join(destination, image.get_filename())
-
         # Check Overwrite Mode, TODO: Consider polymorphic implementation (especially if implementation changes)
         if self.mode == Copier.OverwriteOptions.WARN:
             # WARN
