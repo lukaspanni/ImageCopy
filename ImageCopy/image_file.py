@@ -49,3 +49,5 @@ class ImageFile:
     def __str__(self) -> str:
         return str(self.path)
 
+    def get_filename(self) -> str:
+        return os.path.basename(self.path)

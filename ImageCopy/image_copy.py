@@ -6,6 +6,7 @@ from ImageCopy.action_runner import ActionRunner
 from ImageCopy.config import Config
 from ImageCopy.copier import Copier
 from multiprocessing import Process, Queue
+from sys import exit
 
 CONFIG_FILE = "config.yml"
 
@@ -66,11 +67,12 @@ def main(config_file):
     print("All images copied.")
 
     if not after_copy_actions:
-        exit()
+        exit(0)
 
     print("Executing after copy actions")
-    while not (counter := feedback_queue.get()) == "END":
+    while not (counter := feedback_queue.get(True, 2000)) == "END":
         progress_bar(counter, len(images), prefix="Progress:", suffix="Complete", length=50, end="")
 
 if __name__ == "__main__":
     main(CONFIG_FILE)
+    exit()

@@ -2,6 +2,7 @@ import os
 import shutil
 import time
 from enum import Enum
+from typing import final
 
 from ImageCopy.config import Config
 from ImageCopy.image_file import ImageFile
@@ -40,23 +41,25 @@ class Copier:
         # Workaround to allow rename
         if "." in split_path[-1]:
             target_dir = "/".join(split_path[:-1])
+            final_destination = destination
         else:
             target_dir = destination
+            final_destination = os.path.join(target_dir, image.get_filename())
         if not os.path.exists(target_dir):
             os.makedirs(target_dir, exist_ok=True)
 
         # Check Overwrite Mode, TODO: Consider polymorphic implementation (especially if implementation changes)
         if self.mode == Copier.OverwriteOptions.WARN:
             # WARN
-            if os.path.exists(destination):
-                print("\nOverwriting Image", destination)
+            if os.path.exists(final_destination):
+                print("\nOverwriting Image", final_destination)
 
         if self.mode == Copier.OverwriteOptions.APPEND_SUFFIX:
             # TODO: Add Incremental Suffixes
-            if os.path.exists(destination):
-                destination = destination[:-len(image.extension)] + "_" + str(int(time.time())) + image.extension
+            if os.path.exists(final_destination):
+                final_destination = final_destination[:-len(image.extension)] + "_" + str(int(time.time())) + image.extension
         if self.mode == Copier.OverwriteOptions.NO_OVERWRITE:
-            if os.path.exists(destination):
+            if os.path.exists(final_destination):
                 return None
 
-        return shutil.copy2(str(image), destination)
+        return shutil.copy2(str(image), final_destination)
