@@ -3,4 +3,4 @@ PyYAML==6.0
 pytest==6.2.5
 Pillow>=8.1.1
 numba==0.53.1
-numpy==1.22.0
+numpy==1.22.2
