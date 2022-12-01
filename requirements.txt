@@ -2,5 +2,5 @@ piexif==1.1.3
 PyYAML==6.0
 pytest==7.2.0
 Pillow>=8.1.1
-numba==0.56.3
+numba==0.56.4
 numpy==1.23.4
